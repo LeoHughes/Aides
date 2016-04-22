@@ -210,7 +210,7 @@
           result = '';
 
           for (var i = 0; i < len; i++) {
-            result += charArr[numArr[i]];
+            result += charArr[parseInt(numArr[i])];
           }
 
       return result;

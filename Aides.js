@@ -106,33 +106,33 @@
     };
 
     // 验证日期格式[yyyy-mm-dd]
-    _.isDate = function(text){
-      var reg = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-      return reg.test(text.toString());
+    _.isDate = function(text) {
+        var reg = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+        return reg.test(text.toString());
     };
 
     // 验证邮箱
     _.isEmail = function(text) {
-      var reg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
-      return reg.test(text);
+        var reg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
+        return reg.test(text);
     };
 
     // 验证ip
-    _.isIP = function(text){
-      var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])((\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}|(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){5})$/;
-      return reg.test(text);
+    _.isIP = function(text) {
+        var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])((\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}|(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){5})$/;
+        return reg.test(text);
     };
 
     // 验证url
-    _.isURL = function(text){
-      var reg = /[a-zA-z]+:\/\/[^\s]/;
-      return reg.test(text);
+    _.isURL = function(text) {
+        var reg = /[a-zA-z]+:\/\/[^\s]/;
+        return reg.test(text);
     };
 
     //  验证账号或密码(字母开头，允许6-15字节，允许字母数字下划线)
-    _.verifyAccount = function(text){
-      var reg = /^[a-zA-Z][a-zA-Z0-9_]{5,14}$/;
-      return reg.test(text);
+    _.verifyAccount = function(text) {
+        var reg = /^[a-zA-Z][a-zA-Z0-9_]{5,14}$/;
+        return reg.test(text);
     };
 
     //	去除字符串左右空格
@@ -163,20 +163,6 @@
         return text.replace(regEx, '');
     };
 
-    // 数字金额格式化 type:符号类型
-    // _.formatMoney = function(num,type) {
-    //   var _ = this,
-    //       arr = num.toString().split('.')[0],
-    //       len = Math.floor(_.size(num)/3),
-    //       result = '';
-    //
-    //   for (var i = 3; i < len; i+=3) {
-    //     arr.splice(i,1,',');
-    //   }
-    //
-    //   return arr;
-    // };
-
     // 字符串截取 separator:截断的符号 length:截取位数
     _.trunc = function(text, length, separator) {
         var _ = this,
@@ -206,14 +192,29 @@
      * size: 每个拆分数组的长度。
      *
      **/
-     _.strArr = function(str,size){
-       var _ = this,
-           strArr = str.replace(/(.)(?=[^$])/g,"$1,").split(','),
-           outArr = [];
+    _.strArr = function(str, size) {
+        var _ = this,
+            strArr = str.replace(/(.)(?=[^$])/g, "$1,").split(','),
+            outArr = [];
 
-        return _.chunk(strArr,size);
-     };
+        return _.chunk(strArr, size);
+    };
 
+    // 将[1,2,3...]数字转为汉字数字[一,二,三...]
+    _.exNum = function(text){
+      var _ = this,
+          charArr = ['零','一','二','三','四','五','六','七','八','九','十'],
+          num = _.isNumber(text) ? text.toString() : _.getNum(text),
+          numArr = num.split(''),
+          len = numArr.length,
+          result = '';
+
+          for (var i = 0; i < len; i++) {
+            result += charArr[numArr[i]];
+          }
+
+      return result;
+    };
 
     //	生成范围随机数
     _.roundNum = function(start, end) {
@@ -269,6 +270,14 @@
         }
     };
 
+    // 根据日期[yyyy-mm-dd]获取星期，为空则获取当前时间星期
+    _.getWeek = function(date) {
+        var _ = this;
+        date = date || (_.getDate('EN'));
+
+        return '星期' + _.exNum(new Date(date).getDay());
+    };
+
     // 来获得一个当前时间的整数时间戳
     _.now = function() {
         var _ = this,
@@ -301,6 +310,7 @@
     // 放弃控制变量"_"。返回对象的引用
     _.noConflict = function() {
         var _ = this;
+        root._ = null;
         return _;
     };
 
@@ -311,7 +321,7 @@
             len = fucArr.length;
 
         for (var i = 0; i < len; i++) {
-            _.log('custom', '[ ' + fucArr[i] + ' ]', 'font-size:14px;font-weight:bold;padding:5px;');
+            _.log('custom', '[ ' + fucArr[i] + ' ]', 'font-size:14px;font-weight:bold;');
         }
     };
 
@@ -415,29 +425,29 @@
     };
 
     // 根据传入的object设置localStorage本地存储
-    _.setStoreObj = function(obj){
-      var _ = this;
-      if (_.isObject(obj)) {
-        for (var v in obj) {
-          _.setStoreItem(v,obj[v]);
+    _.setStoreObj = function(obj) {
+        var _ = this;
+        if (_.isObject(obj)) {
+            for (var v in obj) {
+                _.setStoreItem(v, obj[v]);
+            }
         }
-      }
     };
 
     // 将所有localStorage本地存储以Object返回
-    _.getStoreObj = function(){
-      var _ = this,
-          len = store.length;
-          obj = {};
+    _.getStoreObj = function() {
+        var _ = this,
+            len = store.length;
+        obj = {};
 
-      for (var i = 0; i < len; i++) {
-        var key = store.key(i),
-            val = _.getStoreItem(key);
+        for (var i = 0; i < len; i++) {
+            var key = store.key(i),
+                val = _.getStoreItem(key);
 
-        obj[key] = val;
-      }
+            obj[key] = val;
+        }
 
-      return obj;
+        return obj;
 
     };
 
@@ -451,8 +461,8 @@
     };
 
     // 清空localStorage的所有数据
-    _.clearStore = function(){
-      store.clear();
+    _.clearStore = function() {
+        store.clear();
     };
 
 
@@ -702,8 +712,8 @@
         } else if (_.isObject(el)) {
             length = _.keys(el).length;
         } else if (_.isNumber(el)) {
-          el = el.toString().split('.')[0];
-          length = el.length;
+            el = el.toString().split('.')[0];
+            length = el.length;
         }
 
         return length;

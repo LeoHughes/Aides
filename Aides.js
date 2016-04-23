@@ -553,7 +553,7 @@
     _.unique = function(arr) {
         var _ = this;
         if (_.isArray(arr)) {
-            arr.sort(); //先排序
+            arr.sort();
             var r = [arr[0]];
             for (var i = 1; i < arr.length; i++) {
                 if (arr[i] !== r[r.length - 1]) {
@@ -731,12 +731,13 @@
 
     // 如果对象包含给定的键，返回true。
     _.has = function(obj, key) {
-        if (!_.isObject(obj)) return;
-
-        var flag = false;
-
-        for (var v in obj) {
-            if (v === key) flag = true;
+        var _ = this,
+            flag = false;        
+        
+        if(_.isObject(obj)){
+            for (var v in obj) {
+                if (v === key) flag = true;
+            }
         }
 
         return flag;
@@ -744,7 +745,8 @@
 
     // 获取object对象所有的属性名称。
     _.keys = function(obj) {
-        var outArr = [];
+        var _ = this,
+            outArr = [];
 
         if (_.isObject(obj)) {
             for (var p in obj) {
@@ -757,7 +759,8 @@
 
     // 返回object对象所有的属性值。
     _.values = function(obj) {
-        var outArr = [];
+        var _ = this,
+            outArr = [];
 
         if (_.isObject(obj)) {
             for (var v in obj) {
@@ -770,7 +773,8 @@
 
     // 把一个对象转变为一个[key, value]形式的数组。
     _.pairs = function(obj) {
-        var objArr = [];
+        var _ = this,
+            objArr = [];
 
         if (_.isObject(obj)) {
             var keys = _.keys(obj);
@@ -787,9 +791,10 @@
 
     // 返回一个对象里所有的方法名, 已经排序的数组.
     _.methods = function(obj) {
-        var nameArr = [];
-        keys = _.pairs(obj);
-        len = keys.length;
+        var _ = this,
+            nameArr = [];
+            keys = _.pairs(obj);
+            len = keys.length;
 
         for (var i = 0; i < len; i++) {
             var inKeys = keys[i];

@@ -50,7 +50,7 @@
         return Object.prototype.toString.call(obj) === '[object Array]';
     };
 
-    // 如果object是一个函数（Function），返回true。
+    // 如果object是一个Function，返回true。
     _.isFunction = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Function]';
     };
@@ -80,12 +80,12 @@
         return Object.prototype.toString.call(obj) === '[object Date]';
     };
 
-    // 如果object的值是 null，返回true。
+    // 如果object的值是 null、undefined或者空，返回true。
     _.isNull = function(value) {
         return value === '' || value === undefined || value === null ? true : false;
     };
 
-    // 如果object 不包含任何值，返回true。 对于字符串和数组对象，如果length属性为0，那么_.isEmpty检查返回true。
+    // 如果object 不包含任何值，返回true。 对于字符串和数组对象，如果length属性为0，那么返回true。
     _.isEmpty = function(obj) {
         var _ = this,
             flag = true;
@@ -140,12 +140,12 @@
         return text.replace(/(^\s*)|(\s*$)/g, "");
     };
 
-    //  过滤字符串空格
+    //  过滤字符串中的空格
     _.clearSpace = function(text) {
         return text.replace(/[ ]/g, "");
     };
 
-    // 字符串中是否包含中文
+    // 检测字符串中是否包含中文
     _.existCN = function(text) {
         var reg = /.*[\u4e00-\u9fa5]+.*$/;
         return reg.test(text);
@@ -163,7 +163,7 @@
         return text.replace(regEx, '');
     };
 
-    // 字符串截取 separator:截断的符号 length:截取位数
+    // 字符串截取 [separator:截断的符号 length:截取位数]
     _.trunc = function(text, length, separator) {
         var _ = this,
             len = length || text.length,
@@ -172,7 +172,7 @@
         return (text.substring(0, len) + codes);
     };
 
-    // 字符串重复 length:重复次数
+    // 字符串重复 [length:重复次数]
     _.repeat = function(text, length) {
         var _ = this,
             outText = '';

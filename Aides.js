@@ -221,7 +221,7 @@
         return Math.floor(Math.random() * (end - start) + start);
     };
 
-    //随机验证码  num：验证码位数
+    //随机验证码  [num：验证码位数]
     _.getCode = function(num) {
         var arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             arr2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
@@ -236,7 +236,7 @@
         return res;
     };
 
-    // 获取当前时间[年月日] CN中文格式
+    // 获取当前时间(年月日) [CN中文格式]
     _.getDate = function(type) {
         var time = new Date(),
             year = time.getFullYear(),
@@ -253,7 +253,7 @@
         }
     };
 
-    // 获取当前时间[时分秒] CN中文格式
+    // 获取当前时间(时分秒) [CN中文格式]
     _.getTimes = function(type) {
         var time = new Date(),
             hours = time.getHours(),
@@ -287,7 +287,7 @@
         return (date.replace(/-/g, '') + times.replace(/:/g, ''));
     };
 
-    // 获取url参数并转为object
+    // 获取url参数并转为object返回
     _.getUrlParam = function() {
         var reg_url = window.location.search,
             reg_arr = [],
@@ -307,14 +307,14 @@
         }
     };
 
-    // 放弃控制变量"_"。返回对象的引用
+    // 放弃控制变量"_",返回对象的引用
     _.noConflict = function() {
         var _ = this;
         root._ = null;
         return _;
     };
 
-    // 输出工具库所有可用方法
+    // 输出对象所有可用方法
     _.all = function() {
         var _ = this,
             fucArr = _.methods(_),
@@ -325,7 +325,7 @@
         }
     };
 
-    // 工具库扩展
+    // 对象扩展
     _.extend = function(key, fn) {
         var _ = this,
             funcArr = _.methods(_);
@@ -549,7 +549,7 @@
         }
     };
 
-    // 数组除重复项
+    // 数组去除重复项
     _.unique = function(arr) {
         var _ = this;
         if (_.isArray(arr)) {
@@ -610,7 +610,7 @@
         return arr;
     };
 
-    // 将数组后n个元素去除，n默认为1
+    // 将数组后n个元素去除
     _.dropRight = function(arr, size) {
         arr.length = arr.length - size;
         return arr;

@@ -39,9 +39,6 @@
             case 'error':
                 console.error(text);
                 break;
-            case 'custom':
-                console.log('%c' + text, css);
-                break;
         }
     };
 
@@ -321,7 +318,7 @@
             len = fucArr.length;
 
         for (var i = 0; i < len; i++) {
-            _.log('custom', '[ ' + fucArr[i] + ' ]', 'font-size:14px;font-weight:bold;');
+            _.log('log', '[ ' + fucArr[i] + ' ]');
         }
     };
 
@@ -732,8 +729,8 @@
     // 如果对象包含给定的键，返回true。
     _.has = function(obj, key) {
         var _ = this,
-            flag = false;        
-        
+            flag = false;
+
         if(_.isObject(obj)){
             for (var v in obj) {
                 if (v === key) flag = true;

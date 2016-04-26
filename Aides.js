@@ -2,6 +2,8 @@
  * Copyright Leo·Hughes
  * vision：1.0.0;
  **/
+ 
+ 'use strict'
 
 (function() {
 

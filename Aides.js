@@ -10,6 +10,7 @@
         doc;
 
     var _ = {};
+    
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = _;
@@ -82,7 +83,14 @@
         return value === '' || value === undefined || value === null ? true : false;
     };
 
-    // 如果object 不包含任何值，返回true。 对于字符串和数组对象，如果length属性为0，那么返回true。
+    /**
+     * 如果object 不包含任何值，返回true。 对于字符串和数组对象，如果length属性为0，那么返回true。
+     * 
+     * var a = {} => _.isEmpty(a) === true
+     * var a = '' => _.isEmpty(a) === true
+     * var a = [] => _.isEmpty(a) === true
+     * 
+     */
     _.isEmpty = function(obj) {
         var _ = this,
             flag = true;
@@ -136,8 +144,14 @@
     _.trim = function(text) {
         return text.replace(/(^\s*)|(\s*$)/g, "");
     };
-
-    //  过滤字符串中的空格
+ 
+    /**
+     * 过滤字符串中的空格
+     * 
+     * var a = 'a b c';
+     * _.clearSpace(a) => 'abc'
+     * 
+     */
     _.clearSpace = function(text) {
         return text.replace(/[ ]/g, "");
     };
@@ -148,19 +162,40 @@
         return reg.test(text);
     };
 
-    // 保留数字
+    /**
+     * 保留数字
+     * 
+     * var a = 'a1b2c3';
+     * _.getNum(a) => '123'
+     * 
+     */
     _.getNum = function(text) {
         var regEx = /[^\d]/g;
         return text.replace(regEx, '');
     };
 
-    // 保留中文
+    /**
+     * 保留中文
+     * 
+     * var a = '中文zhongwen'
+     * _.getCN(a) => '中文'
+     * 
+     */
     _.getCN = function(text) {
         var regEx = /[^\u4e00-\u9fa5\uf900-\ufa2d]/g;
         return text.replace(regEx, '');
     };
 
-    // 字符串截取 [separator:截断的符号 length:截取位数]
+    /**
+     * 字符串截取
+     * 
+     * length:截取位数
+     * separator:截断的符号
+     * 
+     * var a = 'this is a text,ohoh!'
+     * _.trunc(a,13,'.') =>   'this is a text.'
+     * 
+     */
     _.trunc = function(text, length, separator) {
         var _ = this,
             len = length || text.length,
@@ -169,7 +204,15 @@
         return (text.substring(0, len) + codes);
     };
 
-    // 字符串重复 [length:重复次数]
+    /**
+     * 字符串重复
+     * 
+     * length:重复次数
+     * 
+     * var a = 'a'
+     * _.repeat(a,3) => 'aaa'
+     * 
+     */
     _.repeat = function(text, length) {
         var _ = this,
             outText = '';
@@ -187,6 +230,9 @@
      *
      * str: 需要被处理的字符串。
      * size: 每个拆分数组的长度。
+     * 
+     * var a = 'abcde'
+     * _.strArr(a,2) => [[ab],[cd],[e]]
      *
      **/
     _.strArr = function(str, size) {
@@ -197,7 +243,13 @@
         return _.chunk(strArr, size);
     };
 
-    // 将[1,2,3...]数字转为汉字数字[一,二,三...]
+    /**
+     * 将阿拉伯数字转为汉字数字
+     * 
+     * var a = 2016
+     * _.exNum(a) => 二零一六
+     * 
+     */
     _.exNum = function(text){
       var _ = this,
           charArr = ['零','一','二','三','四','五','六','七','八','九','十'],
@@ -233,7 +285,15 @@
         return res;
     };
 
-    // 获取当前时间(年月日) [CN中文格式]
+    /**
+     * 获取当前时间(年月日)
+     * 
+     * type:CN中文格式
+     * 
+     * _.getDate() => 2014-04-26
+     * _.getDate('CN') => 2014年04月26日
+     * 
+     */
     _.getDate = function(type) {
         var time = new Date(),
             year = time.getFullYear(),
@@ -250,7 +310,15 @@
         }
     };
 
-    // 获取当前时间(时分秒) [CN中文格式]
+    /**
+     * 获取当前时间(时分秒)
+     * 
+     * type:CN中文格式
+     * 
+     * _.getTimes() => 17:06:25
+     * _.getTimes('CN') => 17时06分25秒
+     * 
+     */
     _.getTimes = function(type) {
         var time = new Date(),
             hours = time.getHours(),
@@ -267,7 +335,13 @@
         }
     };
 
-    // 根据日期[yyyy-mm-dd]获取星期，为空则获取当前时间星期
+    /**
+     * 根据日期[yyyy-mm-dd]获取星期，为空则获取当前时间星期
+     * 
+     * _.getWeek() => 星期二
+     * _.getWeek('2016-04-26') => 星期二
+     * 
+     */
     _.getWeek = function(date) {
         var _ = this;
         date = date || (_.getDate('EN'));
@@ -275,7 +349,12 @@
         return '星期' + _.exNum(new Date(date).getDay());
     };
 
-    // 来获得一个当前时间的整数时间戳
+    /**
+     * 来获得一个当前时间的整数时间戳
+     * 
+     * _.now() => '20160426171141'
+     * 
+     */
     _.now = function() {
         var _ = this,
             date = _.getDate('EN').toString(),
@@ -284,7 +363,16 @@
         return (date.replace(/-/g, '') + times.replace(/:/g, ''));
     };
 
-    // 获取url参数并转为object返回
+    /**
+     * 获取url参数并转为object返回
+     * 
+     * 'http://www.baidu.com/?leo'
+     * _.getUrlParam() => 'leo'
+     * 
+     * 'http://www.baidu.com/?name=leo&age=25'
+     * _.getUrlParam() => {'name':'leo','age':'25'}
+     * 
+     */
     _.getUrlParam = function() {
         var reg_url = window.location.search,
             reg_arr = [],
@@ -304,7 +392,15 @@
         }
     };
 
-    // 放弃控制变量"_",返回对象的引用
+    /**
+     * 放弃控制变量"_",返回对象的引用
+     * 
+     * var aides = _._.noConflict()
+     * 
+     * aides.isObject(aides) => true
+     * _.isObject(aides) => error
+     * 
+     */
     _.noConflict = function() {
         var _ = this;
         root._ = null;

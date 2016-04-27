@@ -612,6 +612,7 @@
      * var a = ['one','two','three']
      * _.delValue(a,'two') => ['one','three']
      * 
+     * 
      */
     _.delValue = function(arr, val) {
         var _ = this;

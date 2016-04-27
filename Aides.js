@@ -3,7 +3,7 @@
  * vision：1.0.0;
  **/
  
- 'use strict'
+ 'use strict';
 
 (function() {
 
@@ -437,6 +437,7 @@
      *  time 执行间隔时间
      *  endTime 结束时间[为空将一直执行]
      *  endCallback 结束后的执行方法
+     * 
      **/
     _.setTimesDo = function(callback, time, endTime, endCallback) {
         var _ = this;
@@ -463,6 +464,7 @@
      * name  cookie名称
      * value cookie值
      * time  cookie过期时间,单位秒
+     * 
      **/
     _.setCookie = function(name, value, time) {
         var d = new Date();
@@ -574,6 +576,9 @@
      * arr: 需要被处理的数组。
      * size: 每个拆分数组的长度。
      *
+     * var a = [1,2,3,4,5]
+     * _.chunk(a,2) => [[1,2],[3,4],[5]]
+     * 
      **/
     _.chunk = function(arr, size) {
         var outArr = [];
@@ -586,7 +591,13 @@
         return outArr;
     };
 
-    // 去除数组中的假值元素[null,undefined,'']
+    /**
+     * 去除数组中的假值元素(null,undefined,'')
+     * 
+     * var a =[1,null,3,undefined,5,'']
+     * _.compact(a) => [1,3,5]
+     * 
+     */
     _.compact = function(arr) {
         var outArr = [];
         for (var v in arr) {
@@ -595,7 +606,13 @@
         return outArr;
     };
 
-    // 删除数组中指定的值
+    /**
+     * 删除数组中指定的值
+     * 
+     * var a = ['one','two','three']
+     * _.delValue(a,'two') => ['one','three']
+     * 
+     */
     _.delValue = function(arr, val) {
         var _ = this;
         for (var v in arr) {

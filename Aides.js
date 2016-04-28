@@ -622,7 +622,13 @@
         return arr;
     };
 
-    // 删除数组中指定下标的值
+    /**
+     * 删除数组中指定下标的值
+     * 
+     * var a = [1,2,3,4];
+     * _.delValueByIndex(a,2) => [1,2,4]
+     * 
+     */
     _.delValueByIndex = function(arr, index) {
         var _ = this;
         return _.delValue(arr, arr[index]);

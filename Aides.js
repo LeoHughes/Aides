@@ -27,6 +27,7 @@
 
     /**** Util ****/
 
+
     // 控制台输出
     _.log = function(type, text, css) {
         switch (type) {
@@ -44,46 +45,55 @@
                 break;
         }
     };
+    
 
     // 如果object是一个数组，返回true。
     _.isArray = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
     };
+    
 
     // 如果object是一个Function，返回true。
     _.isFunction = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Function]';
     };
+    
 
     // 如果object是一个对象，返回true。[排除数组和函数]
     _.isObject = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Object]';
     };
+    
 
     // 如果object是一个字符串，返回true。
     _.isString = function(obj) {
         return Object.prototype.toString.call(obj) === '[object String]';
     };
+    
 
     // 如果object是一个数值，返回true (包括 NaN)。
     _.isNumber = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Number]';
     };
+    
 
     // 如果object是一个布尔值，返回true。
     _.isBoolean = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Boolean]';
     };
+    
 
     // 如果object是一个Date类型，返回true。
     _.isDate = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Date]';
     };
+    
 
     // 如果object的值是 null、undefined或者空，返回true。
     _.isNull = function(value) {
         return value === '' || value === undefined || value === null ? true : false;
     };
+    
 
     /**
      * 如果object 不包含任何值，返回true。 对于字符串和数组对象，如果length属性为0，那么返回true。
@@ -111,41 +121,48 @@
 
         return flag;
     };
+    
 
     // 验证日期格式[yyyy-mm-dd]
     _.isDate = function(text) {
         var reg = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
         return reg.test(text.toString());
     };
+    
 
     // 验证邮箱
     _.isEmail = function(text) {
         var reg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
         return reg.test(text);
     };
+    
 
     // 验证ip
     _.isIP = function(text) {
         var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])((\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}|(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){5})$/;
         return reg.test(text);
     };
+    
 
     // 验证url
     _.isURL = function(text) {
         var reg = /[a-zA-z]+:\/\/[^\s]/;
         return reg.test(text);
     };
+    
 
     //  验证账号或密码(字母开头，允许6-15字节，允许字母数字下划线)
     _.verifyAccount = function(text) {
         var reg = /^[a-zA-Z][a-zA-Z0-9_]{5,14}$/;
         return reg.test(text);
     };
+    
 
     //	去除字符串左右空格
     _.trim = function(text) {
         return text.replace(/(^\s*)|(\s*$)/g, "");
     };
+    
  
     /**
      * 过滤字符串中的空格
@@ -157,12 +174,14 @@
     _.clearSpace = function(text) {
         return text.replace(/[ ]/g, "");
     };
+    
 
     // 检测字符串中是否包含中文
     _.existCN = function(text) {
         var reg = /.*[\u4e00-\u9fa5]+.*$/;
         return reg.test(text);
     };
+    
 
     /**
      * 保留数字
@@ -176,6 +195,7 @@
         return text.replace(regEx, '');
     };
 
+
     /**
      * 保留中文
      * 
@@ -187,6 +207,7 @@
         var regEx = /[^\u4e00-\u9fa5\uf900-\ufa2d]/g;
         return text.replace(regEx, '');
     };
+    
 
     /**
      * 字符串截取
@@ -205,6 +226,7 @@
 
         return (text.substring(0, len) + codes);
     };
+    
 
     /**
      * 字符串重复
@@ -226,6 +248,7 @@
         }
         return outText;
     };
+    
 
     /**
      * 将 string 拆分成多个 size 长度的数组
@@ -244,6 +267,7 @@
 
         return _.chunk(strArr, size);
     };
+    
 
     /**
      * 将阿拉伯数字转为汉字数字
@@ -266,11 +290,13 @@
 
       return result;
     };
+    
 
     //	生成范围随机数
     _.roundNum = function(start, end) {
         return Math.floor(Math.random() * (end - start) + start);
     };
+    
 
     //随机验证码  [num：验证码位数]
     _.getCode = function(num) {
@@ -286,6 +312,7 @@
         }
         return res;
     };
+    
 
     /**
      * 获取当前时间(年月日)
@@ -311,6 +338,7 @@
             return dateText += year + '-' + month + '-' + day;
         }
     };
+    
 
     /**
      * 获取当前时间(时分秒)
@@ -336,6 +364,7 @@
             return dateText += hours + ':' + minutes + ':' + seconds;
         }
     };
+    
 
     /**
      * 根据日期[yyyy-mm-dd]获取星期，为空则获取当前时间星期
@@ -350,6 +379,7 @@
 
         return '星期' + _.exNum(new Date(date).getDay());
     };
+    
 
     /**
      * 来获得一个当前时间的整数时间戳
@@ -364,6 +394,7 @@
 
         return (date.replace(/-/g, '') + times.replace(/:/g, ''));
     };
+    
 
     /**
      * 获取url参数并转为object返回
@@ -393,6 +424,7 @@
             return reg_url.substr(1);
         }
     };
+    
 
     /**
      * 放弃控制变量"_",返回对象的引用
@@ -408,6 +440,7 @@
         root._ = null;
         return _;
     };
+    
 
     // 输出对象所有可用方法
     _.all = function() {
@@ -419,6 +452,7 @@
             _.log('log', '[ ' + fucArr[i] + ' ]');
         }
     };
+    
 
     // 对象扩展
     _.extend = function(key, fn) {
@@ -429,6 +463,7 @@
             _[key] = fn;
         }
     };
+    
 
     /**
      *  setInterval方法
@@ -457,6 +492,7 @@
         }
 
     };
+    
 
     /**
      * 设置cookie
@@ -473,6 +509,7 @@
 
         doc.cookie = name + "=" + value + "; " + expires;
     };
+    
 
     // 根据name获取cookie值，若无则返回null
     _.getCookie = function(name) {
@@ -496,12 +533,14 @@
             return doc.cookie;
         }
     };
+    
 
     // 根据name清除cookie
     _.clearCookie = function(name) {
         var _ = this;
         _.setCookie(name, "", -1);
     };
+    
 
     // 根据name设置localStorage本地存储[name相同，后面会覆盖前面的存储值]
     _.setStoreItem = function(name, val) {
@@ -511,6 +550,7 @@
             store.setItem(name, val);
         }
     };
+    
 
     // 根据name获取localStorage存储的值
     _.getStoreItem = function(name) {
@@ -520,6 +560,7 @@
             return store.getItem(name);
         }
     };
+    
 
     // 根据传入的object设置localStorage本地存储
     _.setStoreObj = function(obj) {
@@ -530,6 +571,7 @@
             }
         }
     };
+    
 
     // 将所有localStorage本地存储以Object返回
     _.getStoreObj = function() {
@@ -547,6 +589,7 @@
         return obj;
 
     };
+    
 
     // 根据name删除localStorage存储的值,成功则返回true
     _.removeStoreItem = function(name) {
@@ -556,6 +599,7 @@
 
         return _.getStoreItem(name) === null ? true : false;
     };
+    
 
     // 清空localStorage的所有数据
     _.clearStore = function() {
@@ -565,10 +609,12 @@
 
     /**** Array ****/
 
+
     // 查找指定值在数组中的的第一个的位置
     _.indexOf = function(arr, val) {
         return arr.indexOf(val);
     };
+
 
     /**
      * 将 array 拆分成多个 size 长度的数组
@@ -591,6 +637,7 @@
         return outArr;
     };
 
+
     /**
      * 去除数组中的假值元素(null,undefined,'')
      * 
@@ -605,6 +652,7 @@
         }
         return outArr;
     };
+    
 
     /**
      * 删除数组中指定的值
@@ -622,6 +670,7 @@
         return arr;
     };
 
+
     /**
      * 删除数组中指定下标的值
      * 
@@ -633,6 +682,7 @@
         var _ = this;
         return _.delValue(arr, arr[index]);
     };
+
 
     /**
      * 获得数字数组中最小值 [会先剔除掉假值再返回最小值]
@@ -657,6 +707,7 @@
         }
     };
 
+
     /**
      * 获得数字数组中最大值 [会先剔除掉假值再返回最大值]
      * 
@@ -679,6 +730,7 @@
             return oValue;
         }
     };
+
 
     /**
      * 数组去除重复项[字符串数字和数字视为不同处理]
@@ -709,6 +761,7 @@
         return outArr;  
     };
 
+
     /**
      * 数组合并去重 [字符串数字和数字视为不同处理]
      * 
@@ -731,11 +784,16 @@
         return _.unique(countArr);
     };
 
+
     /**
      * 数组排除掉给定的值
      *
      * arr 需要过滤的数组
      * keys 需要排除掉的值
+     * 
+     * var a = [1,'2',3]
+     * _.difference(a,[1,3]) => ['2']
+     * 
      **/
     _.difference = function(arr, keys) {
         var _ = this;
@@ -751,7 +809,14 @@
         return arr;
     };
 
-    // 将数组前n个元素去除，n默认为1
+
+    /**
+     * 将数组前n个元素去除
+     * 
+     * var a = [1,'2',3]
+     * _.drop(a,2) => [3]
+     * 
+     */
     _.drop = function(arr, size) {
         size = size || 1;
 
@@ -762,11 +827,19 @@
         return arr;
     };
 
-    // 将数组后n个元素去除
+
+    /**
+     * 将数组后n个元素去除
+     * 
+     * var a = [1,'2',3]
+     * _.dropRight(a,2) => [1]
+     * 
+     */
     _.dropRight = function(arr, size) {
         arr.length = arr.length - size;
         return arr;
     };
+
 
     //  使用 value 值来替换 array，从start位置开始, 到end位置结束(不包含end)
     _.fill = function(arr, value, start, end) {
@@ -781,10 +854,15 @@
         return arr;
     };
 
+
     /** 将数组转换为对象。
      *
      * list 键列表
      * values 值列表
+     * 
+     * var a = ['name','age','e-mail']
+     * _.object(a,['leo',25]) => {'name':'leo','age':25,'e-mail':undefined}
+     * 
      **/
     _.object = function(list, values) {
         var _ = this,
@@ -801,7 +879,14 @@
         return obj;
     };
 
-    // 数组内对象根据属性排序 [暂只支持数据两层分级]
+
+    /**
+     * 数组内对象根据属性排序 [暂只支持数据两层分级]
+     * 
+     * var a = [{'name':'user1','age':32},{'name':'user2','age':20},{'name':'user3','age':10}]
+     * _.object(a,'age') => [{'name':'user3','age':10},{'name':'user2','age':20},{'name':'user1','age':32}]
+     * 
+     */
     _.sortByKey = function(arr, key, fn) {
         var _ = this;
         if (_.isArray(arr) && !_.isNull(key)) {
@@ -816,11 +901,16 @@
         }
     };
 
+
     /**
      * 集合内按条件查找对象并返回新的集合
      *
      * key 需要查找的属性值
      * fn 查询条件方法
+     * 
+     * var a = [{'name':'user1','age':32},{'name':'user2','age':20},{'name':'user3','age':10}]
+     * _.filter(a,'age',function(n){ return n > 25}) => [{'name':'user1','age':32}]
+     * 
      **/
     _.filter = function(arr, key, fn) {
         var objArr = [];
@@ -835,11 +925,16 @@
         return objArr;
     };
 
+
     /**
      * 根据属性名遍历集合并将对应的值生成数组返回
      *
-     * arr 需要遍历的对象数组
+     * arr 需要遍历的集合
      * key 需要获得值的属性名
+     * 
+     * var a = [{'name':'leo','age':15},{'name':'hughes','age':25}]
+     * _.pluck(a,'name') => ['leo','hughes']
+     * 
      **/
     _.pluck = function(arr, key) {
         var _ = this,
@@ -854,7 +949,16 @@
         return outArr;
     };
 
-    // 获得字符串、数组的长度,获得对象的属性数量,数字小数点前的位数
+
+    /**
+     * 获得字符串、数组的长度,获得对象的属性数量,数字小数点前的位数
+     * 
+     * _.size('leohughes') => 9
+     * _.size([1,2,3]) => 3
+     * _.size({'name':'leo','age':25}) => 2
+     * _.size(123.4) => 3
+     * 
+     */
     _.size = function(el) {
         var _ = this,
             length;
@@ -871,6 +975,7 @@
         return length;
     };
 
+
     // 在数组中逐项查找，如果找到匹配的元素，函数将立即返回，不会遍历整个数组。
     _.find = function(arr, val) {
         for (var v in arr) {
@@ -881,7 +986,15 @@
 
     /**** Object ****/
 
-    // 如果对象包含给定的键，返回true。
+
+    /**
+     * 如果对象包含给定的键，返回true。
+     * 
+     * var a = {'name':'leo','age':25}
+     * _.has(a,'age') => true
+     * _.has(a,'e-mail') => false
+     * 
+     */
     _.has = function(obj, key) {
         var _ = this,
             flag = false;
@@ -894,8 +1007,15 @@
 
         return flag;
     };
-
-    // 获取object对象所有的属性名称。
+ 
+ 
+    /**
+     * 获取object对象所有的属性名称。
+     * 
+     * var a = {'name':'leo','age':25}
+     * _.keys(a) => ['name','age']
+     * 
+     */
     _.keys = function(obj) {
         var _ = this,
             outArr = [];
@@ -908,8 +1028,15 @@
 
         return outArr;
     };
-
-    // 返回object对象所有的属性值。
+ 
+ 
+    /**
+     * 返回object对象所有的属性值。
+     * 
+     * var a = {'name':'leo','age':25}
+     * _.values(a) => ['leo',25]
+     * 
+     */
     _.values = function(obj) {
         var _ = this,
             outArr = [];
@@ -923,14 +1050,22 @@
         return outArr;
     };
 
-    // 把一个对象转变为一个[key, value]形式的数组。
+
+    /**
+     * 把一个对象转变为一个[key, value]形式的数组。
+     * 
+     * var a = {'name':'leo','age':25}
+     * _.pairs(a) => [['name','leo'],['age',25]]
+     * 
+     */
     _.pairs = function(obj) {
         var _ = this,
             objArr = [];
 
         if (_.isObject(obj)) {
-            var keys = _.keys(obj);
-            len = keys.length;
+            var keys = _.keys(obj),
+                len = keys.length;
+                
             objArr.length = len;
 
             for (var i = 0; i < len; i++) {
@@ -941,11 +1076,18 @@
         return objArr;
     };
 
-    // 返回一个对象里所有的方法名, 已经排序的数组.
+
+    /**
+     * 返回一个对象里所有的方法名, 已经排序的数组.
+     * 
+     * var a ={'name':'leo','say':function(){console.log('hi')}}
+     * _.methods(a) => ['say']
+     * 
+     */
     _.methods = function(obj) {
         var _ = this,
-            nameArr = [];
-            keys = _.pairs(obj);
+            nameArr = [],
+            keys = _.pairs(obj),
             len = keys.length;
 
         for (var i = 0; i < len; i++) {
@@ -956,7 +1098,14 @@
         return nameArr.sort();
     };
 
-    // 去除对象里的假值键
+
+    /**
+     * 去除对象里的假值键
+     * 
+     * var a = {'name':'leo','age':25,'e-mail':'','website':null}
+     * _.objCompact(a) => {'name':'leo','age':25}
+     * 
+     */
     _.objCompact = function(obj) {
         for (var v in obj) {
             if (!obj[v]) {
@@ -967,7 +1116,13 @@
     };
 
 
-    // 返回一个object副本，只过滤出keys[数组]参数指定的属性值。
+    /**
+     * 返回一个object副本，只过滤出keys[数组]参数指定的属性值。
+     * 
+     * var a = {'name':'leo','age':25,'e-mail':'','website':null}
+     * _.pick(a,['name','leo']) => {'name':'leo'}
+     * 
+     */
     _.pick = function(obj, keys) {
         var newObj = {};
 
@@ -980,7 +1135,14 @@
         return newObj;
     };
 
-    // 返回一个object副本，只过滤出除去keys[数组]参数指定的属性值。
+
+    /**
+     * 返回一个object副本，只过滤出除去keys[数组]参数指定的属性值。
+     * 
+     * var a = {'name':'leo','age':25,'e-mail':'','website':null}
+     * _.omit(a,['name','leo']) => {'age':25,'e-mail':'','website':null}
+     * 
+     */
     _.omit = function(obj, keys) {
         var _ = this,
             newObj = {},
@@ -999,7 +1161,13 @@
         return newObj;
     };
 
-    // 将对象合并为一个对象返回
+
+    /**
+     * 将对象合并为一个对象返回
+     * 
+     * _.assign({'name':'leo'},{'age':25}) => {'name':'leo','age':25}
+     * 
+     */
     _.assign = function(targetObj) {
         var _ = this,
             target = targetObj || {},
@@ -1016,5 +1184,6 @@
 
         return target;
     };
+
 
 }.call(this));

@@ -29,7 +29,7 @@
 
 
     // 控制台输出
-    _.log = function(type, text, css) {
+    _.log = function(type, text) {
         switch (type) {
             case 'warn':
                 console.warn(text);

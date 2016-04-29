@@ -634,7 +634,13 @@
         return _.delValue(arr, arr[index]);
     };
 
-    // 获得数字数组中最小项 [会先剔除掉假值再返回最小值]
+    /**
+     * 获得数字数组中最小值 [会先剔除掉假值再返回最小值]
+     * 
+     * var a = ['',1,null,3,5,undefined]
+     * _.getMin(a) => 1
+     * 
+     */
     _.getMin = function(arr) {
         var _ = this;
 
@@ -651,7 +657,13 @@
         }
     };
 
-    // 获得数字数组中最大项 [会先剔除掉假值再返回最大值]
+    /**
+     * 获得数字数组中最大值 [会先剔除掉假值再返回最大值]
+     * 
+     * var a = ['',1,null,3,5,undefined]
+     * _.getMin(a) => 5
+     * 
+     */
     _.getMax = function(arr) {
         var _ = this;
 
@@ -668,22 +680,43 @@
         }
     };
 
-    // 数组去除重复项
+    /**
+     * 数组去除重复项[字符串数字和数字视为不同处理]
+     * 
+     * var a = [1,2,3,'2',2,1]
+     * _.unique(a) => [1,2,3,'2']
+     * 
+     */
     _.unique = function(arr) {
-        var _ = this;
-        if (_.isArray(arr)) {
-            arr.sort();
-            var r = [arr[0]];
-            for (var i = 1; i < arr.length; i++) {
-                if (arr[i] !== r[r.length - 1]) {
-                    r.push(arr[i]);
-                }
-            }
-            return r;
-        }
+        var _ = this,
+            len = arr.length,           
+            uq = {},
+            outArr = [],
+            prefix = '';  
+        
+        for(var i=0; i<len; i++){  
+            if(_.isString(arr[i])) {  
+                prefix = '_str';  
+            } else {  
+                prefix = '';  
+            }  
+            if(!uq[arr[i]+prefix]){  
+                uq[arr[i]+prefix] = true;  
+                outArr.push(arr[i]);  
+            }  
+        }  
+        
+        return outArr;  
     };
 
-    // 数组合并去重 [字符串数字和数字视为不同处理]
+    /**
+     * 数组合并去重 [字符串数字和数字视为不同处理]
+     * 
+     * var a = [1,'2',3]
+     * var b = ['3','2',1]
+     * _.concat(a,b) => [1,'2',3,'3']
+     * 
+     */
     _.concat = function(arr) {
         for (var _len = arguments.length, arrs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             arrs[_key - 1] = arguments[_key];

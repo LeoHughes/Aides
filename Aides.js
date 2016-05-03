@@ -407,7 +407,7 @@
      *
      */
     _.getUrlParam = function() {
-        var reg_url = window.location.search,
+        var reg_url = root.location.search,
             reg_arr = [],
             url_obj = {};
 

@@ -513,27 +513,16 @@
     };
 
 
-    // 根据name获取cookie值，若无则返回null
-    _.getCookie = function(name) {
-        var _ = this;
-
-        if (!_.isNull(name)) {
-            var cstr = doc.cookie,
-                carr = cstr.split(';'),
-                cvalue = null;
-
-            for (var i = 0; i < carr.length; i++) {
-                var sarr = carr[i].split('=');
-                if (sarr[0] == name) {
-                    cvalue = sarr[1];
-                    return cvalue;
-                }
-                return cvalue;
-            }
-            return carr;
-        } else {
-            return doc.cookie;
-        }
+    // 根据name获取cookie值，若无则返回空
+    _.getCookie = function(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) 
+          {
+          var c = ca[i].trim();
+          if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+          }
+        return "";
     };
 
 

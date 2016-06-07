@@ -878,7 +878,7 @@
      * _.object(a,'age') => [{'name':'user3','age':10},{'name':'user2','age':20},{'name':'user1','age':32}]
      *
      */
-    _.sortByKey = function(arr, key, fn) {
+    _.sortByKey = function(arr, key) {
         var _ = this;
         if (_.isArray(arr) && !_.isNull(key)) {
             arr.sort(function(x, y) {

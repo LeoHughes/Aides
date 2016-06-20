@@ -192,7 +192,7 @@
      */
     _.getNum = function(text) {
         var regEx = /[^\d]/g;
-        return text.replace(regEx, '');
+        return parseInt(text.replace(regEx, ''));
     };
 
 
@@ -304,10 +304,11 @@
             arr2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             arr3 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
             arr = arr1.concat(arr2, arr3),
+            length = arr.length,
             res = '';
 
         for (var i = 0; i < num; i++) {
-            var charIndex = this.roundNum(0, arr.length);
+            var charIndex = this.roundNum(0,length);
             res += arr[charIndex];
         }
         return res;
@@ -399,10 +400,10 @@
     /**
      * 获取url参数并转为object返回
      *
-     * 'http://www.baidu.com/?leo'
+     * 'http://www.baidu.com?leo'
      * _.getUrlParam() => 'leo'
      *
-     * 'http://www.baidu.com/?name=leo&age=25'
+     * 'http://www.baidu.com?name=leo&age=25'
      * _.getUrlParam() => {'name':'leo','age':'25'}
      *
      */
@@ -429,7 +430,7 @@
     /**
      * 放弃控制变量"_",返回对象的引用
      *
-     * var aides = _._.noConflict()
+     * var aides = _.noConflict()
      *
      * aides.isObject(aides) => true
      * _.isObject(aides) => error
@@ -618,9 +619,10 @@
      *
      **/
     _.chunk = function(arr, size) {
-        var outArr = [];
+        var outArr = [],
+            length = arr.length;
 
-        for (var i = 0; i < arr.length; i += size) {
+        for (var i = 0; i < length; i += size) {
             var inArr = arr.slice(i, i + size);
             outArr.push(inArr);
         }
@@ -683,13 +685,16 @@
      *
      */
     _.getMin = function(arr) {
-        var _ = this;
+        var _ = this,
+            length;
 
         arr = _.compact(arr);
 
+        length = arr.length;
+
         if (_.isArray(arr)) {
             var oValue = arr[0];
-            for (var i = 0; i < arr.length; i++) {
+            for (var i = 0; i < length; i++) {
                 if (arr[i] < oValue) {
                     oValue = arr[i];
                 }
@@ -707,13 +712,16 @@
      *
      */
     _.getMax = function(arr) {
-        var _ = this;
+        var _ = this,
+            length;
 
         arr = _.compact(arr);
 
+        length = arr.length;
+
         if (_.isArray(arr)) {
             var oValue = 0;
-            for (var i = 0; i < arr.length; i++) {
+            for (var i = 0; i < length; i++) {
                 if (arr[i] > oValue) {
                     oValue = arr[i];
                 }

@@ -518,7 +518,7 @@
     _.getCookie = function(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) 
+        for(var i=0; i<ca.length; i++)
           {
           var c = ca[i].trim();
           if (c.indexOf(name)==0) return c.substring(name.length,c.length);
@@ -883,7 +883,7 @@
      * 数组内对象根据属性排序 [暂只支持数据两层分级]
      *
      * var a = [{'name':'user1','age':32},{'name':'user2','age':20},{'name':'user3','age':10}]
-     * _.object(a,'age') => [{'name':'user3','age':10},{'name':'user2','age':20},{'name':'user1','age':32}]
+     * _.sortByKey(a,'age') => [{'name':'user3','age':10},{'name':'user2','age':20},{'name':'user1','age':32}]
      *
      */
     _.sortByKey = function(arr, key) {

@@ -251,6 +251,21 @@
 
 
     /**
+     * 过滤HTML标签和&nbsp;
+     *
+    **/
+    _.excludeHTML = function(html){
+      var regTag = /<\/?[^>]*>/g,
+          regSpeace = /&nbsp;/ig;
+
+      html = html.replace(regTag,'');
+      html = html.replace(regSpeace,'');
+
+      return html;
+    };
+
+
+    /**
      * 将 string 拆分成多个 size 长度的数组
      *
      * str: 需要被处理的字符串。

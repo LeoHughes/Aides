@@ -266,6 +266,19 @@
 
 
     /**
+     * 过滤HTML标签内联样式但保留HTML标签
+     *
+    **/
+    _.excludeStyle = function(html){
+      var regTag = / style\s*?=\s*?(['"])[\s\S]*?\1/g;
+
+      html = html.replace(regTag,'');
+
+      return html;
+    };
+
+
+    /**
      * 将 string 拆分成多个 size 长度的数组
      *
      * str: 需要被处理的字符串。

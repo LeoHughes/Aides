@@ -1,13 +1,13 @@
-(function(root) {
+(function (root) {
   'use strict';
 
   var name = 'simtool';
   var version = '0.0.1';
   var author = 'Hughes';
 
-  var isBrowser = typeof window !== 'undefined' ? true : false;
-
-  isBrowser ? root = window : root = global;
+  var isBrowser = typeof window !== 'undefined' ?
+    true :
+    false;
 
   //原型方法
   var _create = Object.create;
@@ -23,7 +23,6 @@
   var _max = Math.max;
   var _min = Math.min;
 
-
   //类型标注
   var arrTag = '[object Array]',
     funcTag = '[object Function]',
@@ -38,95 +37,104 @@
 
   /**
    * 判断数组
-   * @param {*} value 
+   * @param {*} value
    */
-  var isArray = function(value) {
+  var isArray = function (value) {
     return _toString.call(value) === arrTag;
   };
 
   /**
    * 判断函数
-   * @param {*} value 
+   * @param {*} value
    */
-  var isFunction = function(value) {
+  var isFunction = function (value) {
     return _toString.call(value) === funcTag;
   };
 
   /**
    * 判断对象
-   * @param {*} value 
+   * @param {*} value
    */
-  var isObject = function(value) {
+  var isObject = function (value) {
     return _toString.call(value) === valueTag;
   };
 
   /**
    * 判断字符串
-   * @param {*} value 
+   * @param {*} value
    */
-  var isString = function(value) {
+  var isString = function (value) {
     return _toString.call(value) === strTag;
   };
 
   /**
    * 判断数字
-   * @param {*} value 
+   * @param {*} value
    */
-  var isNumber = function(value) {
+  var isNumber = function (value) {
     return _toString.call(value) === numTag;
   };
 
   /**
    * 判断布尔值
-   * @param {*} value 
+   * @param {*} value
    */
-  var isBoolean = function(value) {
+  var isBoolean = function (value) {
     return _toString.call(value) === boolTag;
   };
 
   /**
    * 判断Null
-   * @param {*} value 
+   * @param {*} value
    */
-  var isNull = function(value) {
+  var isNull = function (value) {
     return _toString.call(value) === nullTag;
   };
 
   /**
    * 判断undefined
-   * @param {*} value 
+   * @param {*} value
    */
-  var isUndefined = function(value) {
+  var isUndefined = function (value) {
     return _toString.call(value) === undefinedTag;
   };
 
   /**
    * 判断正则表达式
-   * @param {*} value 
+   * @param {*} value
    */
-  var isRegExp = function(value) {
+  var isRegExp = function (value) {
     return _toString.call(value) === regTag;
   };
 
   /**
    * 返回参数数据类型
-   * @param {*} value 
+   * @param {*} value
    */
-  var types = function(value) {
-    if (isArray(value)) return 'array';
-    if (isBoolean(value)) return 'boolean';
-    if (isFunction(value)) return 'function';
-    if (isNull(value)) return 'null';
-    if (isNumber(value)) return 'number';
-    if (isObject(value)) return 'object';
-    if (isString(value)) return 'string';
-    if (isUndefined(value)) return 'undefined';
+  var types = function (value) {
+    if (isArray(value))
+      return 'array';
+    if (isBoolean(value))
+      return 'boolean';
+    if (isFunction(value))
+      return 'function';
+    if (isNull(value))
+      return 'null';
+    if (isNumber(value))
+      return 'number';
+    if (isObject(value))
+      return 'object';
+    if (isString(value))
+      return 'string';
+    if (isUndefined(value))
+      return 'undefined';
   };
 
   //类型string转换
-  var typeFormat = function(value) {
+  var typeFormat = function (value) {
 
-    if (!isString(value)) return value;
+    if (!isString(value))
+      return value;
 
     var trans = _freeze({
       'true': true,
@@ -135,18 +143,18 @@
       'null': null,
     });
 
-    return _hasProp.call(trans, value) ? trans[value] : value;
+    return _hasProp.call(trans, value) ?
+      trans[value] :
+      value;
 
   };
 
-
-  var Tool = function() {
+  var Tool = function () {
     this.author = author;
     this.name = name;
     this.version = version;
     this.isBrowser = isBrowser;
   };
-
 
   Tool.prototype.isArray = isArray;
   Tool.prototype.isFunction = isFunction;
@@ -164,7 +172,7 @@
   /**
    * 返回Tool原型上所有方法名
    */
-  Tool.prototype.all = function() {
+  Tool.prototype.all = function () {
     return _keys(_getProto(this));
   };
 
@@ -172,14 +180,16 @@
    * 验证类型是否为Date
    * @param {*} value
    */
-  Tool.prototype.isDate = function(value) {
+  Tool.prototype.isDate = function (value) {
     var flag;
 
     if (this.isString(value)) {
 
       var d = new Date(value);
 
-      flag = d != 'Invalid Date' ? _toString.call(new Date(value)) === dateTag : false;
+      flag = d != 'Invalid Date' ?
+        _toString.call(new Date(value)) === dateTag :
+        false;
 
     } else {
 
@@ -197,7 +207,7 @@
    * 对于空对象也返回true。
    * @param {*} value
    */
-  Tool.prototype.isEmpty = function(value) {
+  Tool.prototype.isEmpty = function (value) {
 
     var flag = true;
 
@@ -214,7 +224,9 @@
     }
 
     if (this.isArray(value) || this.isString(value)) {
-      flag = value.length > 0 ? false : true;
+      flag = value.length > 0 ?
+        false :
+        true;
     }
 
     if (this.isObject(value)) {
@@ -232,8 +244,9 @@
    * 去除字符串左右空格
    * @param {String} value
    */
-  Tool.prototype.trim = function(value) {
-    if (!this.isString(value)) return value;
+  Tool.prototype.trim = function (value) {
+    if (!this.isString(value))
+      return value;
     return value.replace(/(^\s*)|(\s*$)/g, '');
   };
 
@@ -241,8 +254,9 @@
    * 过滤字符串中的空格
    * @param {String} value
    */
-  Tool.prototype.clearSpace = function(value) {
-    if (!this.isString(value)) return value;
+  Tool.prototype.clearSpace = function (value) {
+    if (!this.isString(value))
+      return value;
     return value.replace(/[ ]/g, '');
   };
 
@@ -250,8 +264,9 @@
    * 检测字符串中是否包含中文
    * @param {String} value
    */
-  Tool.prototype.existCN = function(value) {
-    if (!this.isString(value)) return value;
+  Tool.prototype.existCN = function (value) {
+    if (!this.isString(value))
+      return value;
     return /.*[\u4e00-\u9fa5]+.*$/.test(value);
   };
 
@@ -259,37 +274,44 @@
    * 从字符串中获取数字
    * @param {String} value
    */
-  Tool.prototype.getNumber = function(value) {
-    if (!this.isString(value)) return value;
+  Tool.prototype.getNumber = function (value) {
+    if (!this.isString(value))
+      return value;
 
     var val = value.replace(/[^\d]/g, '');
 
-    return val !== '' ? parseInt(val) : val;
+    return val !== '' ?
+      parseInt(val) :
+      val;
   };
 
   /**
    * 从字符串中获取中文
    * @param {String} value
    */
-  Tool.prototype.getCN = function(value) {
-    if (!this.isString(value)) return value;
+  Tool.prototype.getCN = function (value) {
+    if (!this.isString(value))
+      return value;
 
     return value.replace(/[^\u4e00-\u9fa5\uf900-\ufa2d]/g, '');
   };
 
   /**
    * 字符串截取
-   * 
-   * @param {*} value 
+   *
+   * @param {*} value
    * @param {Number|String} length 截取位数
    * @param {String} separator 截断的符号
    */
-  Tool.prototype.trunc = function(value, length, separator) {
+  Tool.prototype.trunc = function (value, length, separator) {
 
-    if (!this.isString(value)) return value;
+    if (!this.isString(value))
+      return value;
 
     var len = parseInt(length) || value.length;
-    var codes = separator ? separator.toString() : '...';
+    var codes = separator ?
+      separator.toString() :
+      '...';
 
     return (value.substring(0, len) + codes);
   };
@@ -298,11 +320,14 @@
    * 过滤HTML标签和&nbsp;
    * @param {String} value
    */
-  Tool.prototype.excludeHTML = function(value) {
+  Tool.prototype.excludeHTML = function (value) {
 
-    if (!this.isString(value)) return value;
+    if (!this.isString(value))
+      return value;
 
-    value = value.replace(/<\/?[^>]*>/g, '').replace(/&nbsp;/ig, '');
+    value = value
+      .replace(/<\/?[^>]*>/g, '')
+      .replace(/&nbsp;/ig, '');
 
     return value;
   };
@@ -311,9 +336,10 @@
    * 过滤HTML标签内联样式但保留HTML标签
    * @param {String} value
    */
-  Tool.prototype.excludeStyle = function(value) {
+  Tool.prototype.excludeStyle = function (value) {
 
-    if (!this.isString(value)) return value;
+    if (!this.isString(value))
+      return value;
 
     return value.replace(/ style\s*?=\s*?(['"])[\s\S]*?\1/g, '');
   };
@@ -322,13 +348,15 @@
    * HTML转义
    * @param {String} value
    */
-  Tool.prototype.HTMLEncode = function(value) {
+  Tool.prototype.HTMLEncode = function (value) {
 
-    if (!this.isString(value)) return value;
+    if (!this.isString(value))
+      return value;
 
     var str = '';
 
-    str = value.replace(/&/g, '&amp;')
+    str = value
+      .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/ /g, '&nbsp;')
@@ -344,13 +372,15 @@
    * HTML反转义
    * @param {String} value
    */
-  Tool.prototype.HTMLDecode = function(value) {
+  Tool.prototype.HTMLDecode = function (value) {
 
-    if (!this.isString(value)) return value;
+    if (!this.isString(value))
+      return value;
 
     var str = '';
 
-    str = value.replace(/&amp;/g, '&')
+    str = value
+      .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&nbsp;;/g, ' ')
@@ -364,12 +394,13 @@
 
   /**
    * 生成范围随机数
-   * @param {Number|String} start 
-   * @param {Number|String} end 
+   * @param {Number|String} start
+   * @param {Number|String} end
    */
-  Tool.prototype.roundNum = function(start, end) {
+  Tool.prototype.roundNum = function (start, end) {
 
-    if (!this.isNumber(start) || !this.isNumber(end)) return '';
+    if (!this.isNumber(start) || !this.isNumber(end))
+      return '';
 
     start = parseInt(start);
     end = parseInt(end);
@@ -382,13 +413,17 @@
    * 随机码
    * @param {Number} num 验证码位数
    */
-  Tool.prototype.randomCode = function(num) {
+  Tool.prototype.randomCode = function (num) {
 
     var code = '';
 
-    if (!this.isNumber(num) || !this.isNumber(this.getNumber(num))) return '';
+    if (!this.isNumber(num) || !this.isNumber(this.getNumber(num)))
+      return '';
 
-    code = Math.random().toString(32).slice(2, num + 2);
+    code = Math
+      .random()
+      .toString(32)
+      .slice(2, num + 2);
 
     if (code.length < num) {
       code += this.randomCode(num - code.length);
@@ -400,13 +435,16 @@
 
   /**
    * 字符串格式化为对象
-   * @param {String} str 
+   * @param {String} str
    */
-  Tool.prototype.stringFormat = function(str) {
+  Tool.prototype.stringFormat = function (str) {
 
-    if (!this.isString(str)) return '';
+    if (!this.isString(str))
+      return '';
 
-    var strArr = str.indexOf('&') === -1 ? str.split('=') : str.split('&');
+    var strArr = str.indexOf('&') === -1 ?
+      str.split('=') :
+      str.split('&');
 
     var formatObj = {};
 
@@ -435,7 +473,7 @@
    * 对象转换为字符串
    * @param {Object} obj
    */
-  Tool.prototype.objToString = function(obj) {
+  Tool.prototype.objToString = function (obj) {
 
     var keysArr = _keys(obj);
     var len = keysArr.length;
@@ -443,7 +481,9 @@
     var str = '';
 
     for (let index = 0; index < len; index++) {
-      str += typeFormat(keysArr[index]) + '=' + typeFormat(valuesArr[index]) + (index === len - 1 ? '' : '&');
+      str += typeFormat(keysArr[index]) + '=' + typeFormat(valuesArr[index]) + (index === len - 1 ?
+        '' :
+        '&');
     }
 
     return str;
@@ -453,19 +493,23 @@
    * url参数格式化
    * @param {*} url
    */
-  Tool.prototype.urlParamFormat = function(url) {
+  Tool.prototype.urlParamFormat = function (url) {
 
-    if (!this.isBrowser && !this.isString(url)) return null;
+    if (!this.isBrowser && !this.isString(url))
+      return null;
 
     var urlParam = {};
 
     if (this.isBrowser) {
-      url = url ? url.split('?')[1] : decodeURI(root.location.search.substr(1));
+      url = url ?
+        url.split('?')[1] :
+        decodeURI(root.location.search.substr(1));
     } else {
       url = url || null;
     }
 
-    if (!url) return null;
+    if (!url)
+      return null;
 
     urlParam = this.stringFormat(url);
 
@@ -475,11 +519,12 @@
 
   /**
    * 去除数组中的假值元素和空对象
-   * @param {Array} arr 
+   * @param {Array} arr
    */
-  Tool.prototype.compact = function(arr) {
+  Tool.prototype.compact = function (arr) {
 
-    if (!this.isArray(arr)) return [];
+    if (!this.isArray(arr))
+      return [];
 
     var len = arr.length;
     var newArr = [];
@@ -496,11 +541,12 @@
 
   /**
    * 获取数组最大值
-   * @param {Array} arr 
+   * @param {Array} arr
    */
-  Tool.prototype.max = function(arr) {
+  Tool.prototype.max = function (arr) {
 
-    if (!this.isArray(arr)) return null;
+    if (!this.isArray(arr))
+      return null;
 
     return _max.apply(null, this.compact(arr));
 
@@ -508,11 +554,12 @@
 
   /**
    * 获取数组最小值
-   * @param {Array} arr 
+   * @param {Array} arr
    */
-  Tool.prototype.min = function(arr) {
+  Tool.prototype.min = function (arr) {
 
-    if (!this.isArray(arr)) return null;
+    if (!this.isArray(arr))
+      return null;
 
     return _min.apply(null, this.compact(arr));
 
@@ -520,11 +567,12 @@
 
   /**
    * 数组去重
-   * @param {Array} arr 
+   * @param {Array} arr
    */
-  Tool.prototype.unique = function(arr) {
+  Tool.prototype.unique = function (arr) {
 
-    if (!this.isArray(arr)) return null;
+    if (!this.isArray(arr))
+      return null;
 
     arr = this.compact(arr);
 
@@ -551,25 +599,28 @@
 
   /**
    * 根据属性名和值(或条件方法)递归获取集合数据
-   * @param {Array} arr 
+   * @param {Array} arr
    * @param {String} key 属性名
    * @param {*} condition 值或条件方法
    */
-  Tool.prototype.collectDeep = function(arr, key, condition) {
+  Tool.prototype.collectDeep = function (arr, key, condition) {
 
-    if (!this.isArray(arr) || !this.isString(key)) return null;
+    if (!this.isArray(arr) || !this.isString(key))
+      return null;
 
     var result = [];
 
-    var _deep = function(_arr, _key, _condition) {
+    var _deep = function (_arr, _key, _condition) {
       var len = _arr.length;
 
       for (var index = 0; index < len; index++) {
         var el = _arr[index];
 
-        if (this.isFunction(_condition) && _condition(el[_key])) result.push(el);
+        if (this.isFunction(_condition) && _condition(el[_key]))
+          result.push(el);
 
-        if (el[_key] === _condition) result.push(el);
+        if (el[_key] === _condition)
+          result.push(el);
 
         for (var k in el) {
           if (_hasProp.call(el, k) && this.isArray(el[k])) {
@@ -592,10 +643,12 @@
    * @param {*} pvalue 父级id或标识的值
    * @param {String} childArrName 子级名称
    */
-  Tool.prototype.tree = function(arr, pkey, pvalue, childName) {
+  Tool.prototype.tree = function (arr, idName, pkey, pvalue, childName) {
 
-    if (!this.isArray(arr) || !this.isString(pkey)) return null;
+    if (!this.isArray(arr) || !this.isString(pkey))
+      return null;
 
+    idName = idName || 'id';
     childName = childName || 'child';
 
     var result = [];
@@ -607,14 +660,15 @@
 
       if (el[pkey] == pvalue) {
 
-        var nodes = this.collectDeep(arr, pkey, el.id);
+        var nodes = this.collectDeep(arr, pkey, el[idName]);
         var nlen = nodes.length;
 
-        if (this.isUndefined(el[childName]) && nlen !== 0)(el[childName] = []) && (el[childName] = nodes);
+        if (this.isUndefined(el[childName]) && nlen !== 0)
+          (el[childName] = []) && (el[childName] = nodes);
 
         result.push(el);
 
-        this.tree(arr, pkey, el.id, childName);
+        this.tree(arr, pkey, el[idName], childName);
 
       }
 
@@ -630,17 +684,28 @@
    * @param {String} key 排序属性
    * @param {String} type 排序方式 asc升序,desc倒序
    */
-  Tool.prototype.sortByKey = function(arr, key, type) {
+  Tool.prototype.sortByKey = function (arr, key, type) {
 
-    if (!this.isArray(arr) || !this.isString(key)) return null;
+    if (!this.isArray(arr) || !this.isString(key))
+      return null;
 
     type = type || 'asc';
 
-    var _sort = function(a, b) {
-      return key ? (a[key] > b[key] ? 1 : -1) : (a > b ? 1 : -1);
+    var _sort = function (a, b) {
+      return key ?
+        (a[key] > b[key] ?
+          1 :
+          -1) :
+        (a > b ?
+          1 :
+          -1);
     };
 
-    type === 'asc' ? arr.sort(_sort) : arr.sort(_sort).reverse();
+    type === 'asc' ?
+      arr.sort(_sort) :
+      arr
+        .sort(_sort)
+        .reverse();
 
     var len = arr.length;
 
@@ -669,17 +734,18 @@
    * @param {Function} fn 需要防抖的函数
    * @param {Number} wait 间隔执行时间
    */
-  Tool.prototype.debounce = function(fn, wait) {
+  Tool.prototype.debounce = function (fn, wait) {
 
     var timeout;
 
-    return function() {
+    return function () {
       var context = this;
       var args = arguments;
 
-      if (timeout) clearTimeout(timeout);
+      if (timeout)
+        clearTimeout(timeout);
 
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         fn.apply(context, args);
       }, wait);
     };
@@ -693,15 +759,22 @@
    * @param {Boolean}  enumOnly 是否深度遍历
    * @param {Boolean} complete 是否完全复制
    */
-  Tool.prototype.clone = function(from, option) {
+  Tool.prototype.clone = function (from, option) {
 
-    if (!this.isObject(from)) return from;
+    if (!this.isObject(from))
+      return from;
 
-    option = option || { enumOnly: false, complete: false, };
+    option = option || {
+      enumOnly: false,
+      complete: false,
+    };
 
     var newObj = _create(_getProto(from));
 
-    var propNames = this.isBoolean(option.enumOnly) && option.enumOnly ? _getPropNames(from) : _keys(from);
+    var propNames = this.isBoolean(option.enumOnly) && option.enumOnly ?
+      _getPropNames(from) :
+      _keys(from);
+
     var len = propNames.length;
 
     for (var index = 0; index < len; index++) {
@@ -714,7 +787,9 @@
 
       } else {
 
-        this.isBoolean(option.complete) && option.complete ? _defineProp(newObj, propNames[index], _getPropDesc(from, propNames[index])) : (newObj[propNames[index]] = prop);
+        this.isBoolean(option.complete) && option.complete ?
+          _defineProp(newObj, propNames[index], _getPropDesc(from, propNames[index])) :
+          (newObj[propNames[index]] = prop);
 
       }
 
@@ -729,7 +804,7 @@
    * @param {*} obj 冻结数据源
    * @param {Boolean} deep 是否深冻结
    */
-  Tool.prototype.freeze = function(obj, deep) {
+  Tool.prototype.freeze = function (obj, deep) {
 
     deep = deep || false;
 
@@ -742,7 +817,8 @@
 
         var prop = obj[propNames[index]];
 
-        if (this.isObject(prop)) this.freeze(prop, deep);
+        if (this.isObject(prop))
+          this.freeze(prop, deep);
 
       }
 
@@ -754,15 +830,13 @@
 
   };
 
-
-
-
   /***********/
   var simtool = Object.freeze(new Tool());
 
   if (simtool.isBrowser) {
 
-    if (!root.st) root.st = simtool;
+    if (!root._)
+      root._ = simtool;
 
   } else {
 

@@ -693,19 +693,13 @@
 
     var _sort = function (a, b) {
       return key ?
-        (a[key] > b[key] ?
-          1 :
-          -1) :
-        (a > b ?
-          1 :
-          -1);
+        (a[key] > b[key] ? 1 : -1) :
+        (a > b ? 1 : -1);
     };
 
     type === 'asc' ?
       arr.sort(_sort) :
-      arr
-        .sort(_sort)
-        .reverse();
+      arr.sort(_sort).reverse();
 
     var len = arr.length;
 

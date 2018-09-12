@@ -5,9 +5,9 @@
   var version = '0.0.1';
   var author = 'Hughes';
 
-  var isBrowser = typeof window !== 'undefined'
-    ? true
-    : false;
+  var isBrowser = typeof window !== 'undefined' ?
+    true :
+    false;
 
   //原型方法
   var _create = Object.create;
@@ -112,35 +112,40 @@
    * @param {*} value
    */
   var types = function (value) {
-    if (isArray(value)) 
+    if (isArray(value))
       return 'array';
-    if (isBoolean(value)) 
+    if (isBoolean(value))
       return 'boolean';
-    if (isFunction(value)) 
+    if (isFunction(value))
       return 'function';
-    if (isNull(value)) 
+    if (isNull(value))
       return 'null';
-    if (isNumber(value)) 
+    if (isNumber(value))
       return 'number';
-    if (isObject(value)) 
+    if (isObject(value))
       return 'object';
-    if (isString(value)) 
+    if (isString(value))
       return 'string';
-    if (isUndefined(value)) 
+    if (isUndefined(value))
       return 'undefined';
   };
-  
+
   //类型string转换
   var typeFormat = function (value) {
 
-    if (!isString(value)) 
+    if (!isString(value))
       return value;
-    
-    var trans = _freeze({'true': true, 'false': false, 'undefined': undefined, 'null': null,});
 
-    return _hasProp.call(trans, value)
-      ? trans[value]
-      : value;
+    var trans = _freeze({
+      'true': true,
+      'false': false,
+      'undefined': undefined,
+      'null': null,
+    });
+
+    return _hasProp.call(trans, value) ?
+      trans[value] :
+      value;
 
   };
 
@@ -182,9 +187,9 @@
 
       var d = new Date(value);
 
-      flag = d != 'Invalid Date'
-        ? _toString.call(new Date(value)) === dateTag
-        : false;
+      flag = d != 'Invalid Date' ?
+        _toString.call(new Date(value)) === dateTag :
+        false;
 
     } else {
 
@@ -219,9 +224,9 @@
     }
 
     if (this.isArray(value) || this.isString(value)) {
-      flag = value.length > 0
-        ? false
-        : true;
+      flag = value.length > 0 ?
+        false :
+        true;
     }
 
     if (this.isObject(value)) {
@@ -240,7 +245,7 @@
    * @param {String} value
    */
   Tool.prototype.trim = function (value) {
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
     return value.replace(/(^\s*)|(\s*$)/g, '');
   };
@@ -250,7 +255,7 @@
    * @param {String} value
    */
   Tool.prototype.clearSpace = function (value) {
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
     return value.replace(/[ ]/g, '');
   };
@@ -260,7 +265,7 @@
    * @param {String} value
    */
   Tool.prototype.existCN = function (value) {
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
     return /.*[\u4e00-\u9fa5]+.*$/.test(value);
   };
@@ -270,14 +275,14 @@
    * @param {String} value
    */
   Tool.prototype.getNumber = function (value) {
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     var val = value.replace(/[^\d]/g, '');
 
-    return val !== ''
-      ? parseInt(val)
-      : val;
+    return val !== '' ?
+      parseInt(val) :
+      val;
   };
 
   /**
@@ -285,9 +290,9 @@
    * @param {String} value
    */
   Tool.prototype.getCN = function (value) {
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     return value.replace(/[^\u4e00-\u9fa5\uf900-\ufa2d]/g, '');
   };
 
@@ -300,13 +305,13 @@
    */
   Tool.prototype.trunc = function (value, length, separator) {
 
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     var len = parseInt(length) || value.length;
-    var codes = separator
-      ? separator.toString()
-      : '...';
+    var codes = separator ?
+      separator.toString() :
+      '...';
 
     return (value.substring(0, len) + codes);
   };
@@ -317,9 +322,9 @@
    */
   Tool.prototype.excludeHTML = function (value) {
 
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     value = value
       .replace(/<\/?[^>]*>/g, '')
       .replace(/&nbsp;/ig, '');
@@ -333,9 +338,9 @@
    */
   Tool.prototype.excludeStyle = function (value) {
 
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     return value.replace(/ style\s*?=\s*?(['"])[\s\S]*?\1/g, '');
   };
 
@@ -345,9 +350,9 @@
    */
   Tool.prototype.HTMLEncode = function (value) {
 
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     var str = '';
 
     str = value
@@ -369,9 +374,9 @@
    */
   Tool.prototype.HTMLDecode = function (value) {
 
-    if (!this.isString(value)) 
+    if (!this.isString(value))
       return value;
-    
+
     var str = '';
 
     str = value
@@ -394,9 +399,9 @@
    */
   Tool.prototype.roundNum = function (start, end) {
 
-    if (!this.isNumber(start) || !this.isNumber(end)) 
+    if (!this.isNumber(start) || !this.isNumber(end))
       return '';
-    
+
     start = parseInt(start);
     end = parseInt(end);
 
@@ -412,9 +417,9 @@
 
     var code = '';
 
-    if (!this.isNumber(num) || !this.isNumber(this.getNumber(num))) 
+    if (!this.isNumber(num) || !this.isNumber(this.getNumber(num)))
       return '';
-    
+
     code = Math
       .random()
       .toString(32)
@@ -434,12 +439,12 @@
    */
   Tool.prototype.stringFormat = function (str) {
 
-    if (!this.isString(str)) 
+    if (!this.isString(str))
       return '';
-    
-    var strArr = str.indexOf('&') === -1
-      ? str.split('=')
-      : str.split('&');
+
+    var strArr = str.indexOf('&') === -1 ?
+      str.split('=') :
+      str.split('&');
 
     var formatObj = {};
 
@@ -476,9 +481,9 @@
     var str = '';
 
     for (let index = 0; index < len; index++) {
-      str += typeFormat(keysArr[index]) + '=' + typeFormat(valuesArr[index]) + (index === len - 1
-        ? ''
-        : '&');
+      str += typeFormat(keysArr[index]) + '=' + typeFormat(valuesArr[index]) + (index === len - 1 ?
+        '' :
+        '&');
     }
 
     return str;
@@ -490,22 +495,22 @@
    */
   Tool.prototype.urlParamFormat = function (url) {
 
-    if (!this.isBrowser && !this.isString(url)) 
+    if (!this.isBrowser && !this.isString(url))
       return null;
-    
+
     var urlParam = {};
 
     if (this.isBrowser) {
-      url = url
-        ? url.split('?')[1]
-        : decodeURI(root.location.search.substr(1));
+      url = url ?
+        url.split('?')[1] :
+        decodeURI(root.location.search.substr(1));
     } else {
       url = url || null;
     }
 
-    if (!url) 
+    if (!url)
       return null;
-    
+
     urlParam = this.stringFormat(url);
 
     return urlParam;
@@ -518,9 +523,9 @@
    */
   Tool.prototype.compact = function (arr) {
 
-    if (!this.isArray(arr)) 
+    if (!this.isArray(arr))
       return [];
-    
+
     var len = arr.length;
     var newArr = [];
 
@@ -540,9 +545,9 @@
    */
   Tool.prototype.max = function (arr) {
 
-    if (!this.isArray(arr)) 
+    if (!this.isArray(arr))
       return null;
-    
+
     return _max.apply(null, this.compact(arr));
 
   };
@@ -553,9 +558,9 @@
    */
   Tool.prototype.min = function (arr) {
 
-    if (!this.isArray(arr)) 
+    if (!this.isArray(arr))
       return null;
-    
+
     return _min.apply(null, this.compact(arr));
 
   };
@@ -566,9 +571,9 @@
    */
   Tool.prototype.unique = function (arr) {
 
-    if (!this.isArray(arr)) 
+    if (!this.isArray(arr))
       return null;
-    
+
     arr = this.compact(arr);
 
     if (this.types(root.Set) !== 'undefined') {
@@ -600,9 +605,9 @@
    */
   Tool.prototype.collectDeep = function (arr, key, condition) {
 
-    if (!this.isArray(arr) || !this.isString(key)) 
+    if (!this.isArray(arr) || !this.isString(key))
       return null;
-    
+
     var result = [];
 
     var _deep = function (_arr, _key, _condition) {
@@ -611,12 +616,12 @@
       for (var index = 0; index < len; index++) {
         var el = _arr[index];
 
-        if (this.isFunction(_condition) && _condition(el[_key])) 
+        if (this.isFunction(_condition) && _condition(el[_key]))
           result.push(el);
-        
-        if (el[_key] === _condition) 
+
+        if (el[_key] === _condition)
           result.push(el);
-        
+
         for (var k in el) {
           if (_hasProp.call(el, k) && this.isArray(el[k])) {
             _deep(el[k], _key, _condition);
@@ -640,9 +645,9 @@
    */
   Tool.prototype.tree = function (arr, idName, pkey, pvalue, childName) {
 
-    if (!this.isArray(arr) || !this.isString(pkey)) 
+    if (!this.isArray(arr) || !this.isString(pkey))
       return null;
-    
+
     idName = idName || 'id';
     childName = childName || 'child';
 
@@ -658,9 +663,9 @@
         var nodes = this.collectDeep(arr, pkey, el[idName]);
         var nlen = nodes.length;
 
-        if (this.isUndefined(el[childName]) && nlen !== 0) 
+        if (this.isUndefined(el[childName]) && nlen !== 0)
           (el[childName] = []) && (el[childName] = nodes);
-        
+
         result.push(el);
 
         this.tree(arr, pkey, el[idName], childName);
@@ -681,24 +686,20 @@
    */
   Tool.prototype.sortByKey = function (arr, key, type) {
 
-    if (!this.isArray(arr) || !this.isString(key)) 
+    if (!this.isArray(arr) || !this.isString(key))
       return null;
-    
+
     type = type || 'asc';
 
     var _sort = function (a, b) {
-      return key
-        ? (a[key] > b[key]
-          ? 1
-          : -1)
-        : (a > b
-          ? 1
-          : -1);
+      return key ?
+        (a[key] > b[key] ? 1 : -1) :
+        (a > b ? 1 : -1);
     };
 
-    type === 'asc'
-      ? arr.sort(_sort)
-      : arr
+    type === 'asc' ?
+      arr.sort(_sort) :
+      arr
         .sort(_sort)
         .reverse();
 
@@ -737,9 +738,9 @@
       var context = this;
       var args = arguments;
 
-      if (timeout) 
+      if (timeout)
         clearTimeout(timeout);
-      
+
       timeout = setTimeout(function () {
         fn.apply(context, args);
       }, wait);
@@ -756,9 +757,9 @@
    */
   Tool.prototype.clone = function (from, option) {
 
-    if (!this.isObject(from)) 
+    if (!this.isObject(from))
       return from;
-    
+
     option = option || {
       enumOnly: false,
       complete: false,
@@ -766,9 +767,9 @@
 
     var newObj = _create(_getProto(from));
 
-    var propNames = this.isBoolean(option.enumOnly) && option.enumOnly
-      ? _getPropNames(from)
-      : _keys(from);
+    var propNames = this.isBoolean(option.enumOnly) && option.enumOnly ?
+      _getPropNames(from) :
+      _keys(from);
 
     var len = propNames.length;
 
@@ -782,9 +783,9 @@
 
       } else {
 
-        this.isBoolean(option.complete) && option.complete
-          ? _defineProp(newObj, propNames[index], _getPropDesc(from, propNames[index]))
-          : (newObj[propNames[index]] = prop);
+        this.isBoolean(option.complete) && option.complete ?
+          _defineProp(newObj, propNames[index], _getPropDesc(from, propNames[index])) :
+          (newObj[propNames[index]] = prop);
 
       }
 
@@ -812,11 +813,11 @@
 
         var prop = obj[propNames[index]];
 
-        if (this.isObject(prop)) 
+        if (this.isObject(prop))
           this.freeze(prop, deep);
 
       }
-      
+
       return _freeze(obj);
 
     }
@@ -830,11 +831,10 @@
 
   if (simtool.isBrowser) {
 
-    if (!root._) 
+    if (!root._)
       root._ = simtool;
 
-  }
-  else {
+  } else {
 
     module.exports = simtool;
 
